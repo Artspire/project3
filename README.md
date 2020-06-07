@@ -40,4 +40,3 @@ with the help of some JavaScript.
 ### Personal touch
 
 My personal touch is allowing site administrators to mark orders as complete and allowing users to see the status of their pending or completed orders. When the site administrator (superuser) logs in to the website, the
-# project3
