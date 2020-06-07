@@ -1,0 +1,35 @@
+{% extends "orders/base.html" %}
+
+{% block title %}
+    Order History
+{% endblock %}
+
+{% block content %}
+    <h1>Order history</h1>
+    <hr>
+    <h2>Welcome, {{ user }}</h2>
+    <ul class="ul-style">
+        {% if orders %}
+            <li id="cart-list-title">Your orders:</li>
+        {% endif %}
+        {% for order in orders %}
+        {% empty %}
+            <li class="font-style"><i>You have not placed any orders yet</i></li>
+        {% endfor %}
+    </ul>
+    {% for order in orders %}
+        <table>
+            <tr id="orders-table-head">
+                <td><b>Order number:</b> {{ order.order_number }}</td>
+                <td><b>Price:</b> ${{ order.total_price }}</td>
+                <td><b>Status:</b> {{ order.get_status_display }}</td>
+                <td><b>Date:</b> {{ order.time }}</td>
+            </tr>
+            <tr>
+                <td colspan="4" id="order-items">{{ order.items }}</td>
+            </tr>
+        </table>
+        <hr>
+    {% endfor %}
+
+{% endblock %}

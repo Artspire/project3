@@ -1,0 +1,85 @@
+{% extends "orders/base.html" %}
+
+{% block title %}
+    Cart
+{% endblock %}
+
+{% block content %}
+    <h1>Cart</h1>
+    <hr>
+    <div class="centered">
+        <ul class="ul-style" id="cart-list">
+            {% if items %}
+                <li id="cart-list-title">Items in cart:</li>
+            {% endif %}
+            {% for item in items %}
+                <li>{{ item.item }}</li>
+                {% if item.toppings %}
+                    <li><i>Toppings: </i>{{ item.toppings }}</li>
+                {% endif %}
+                {% if item.extras %}
+                    <li><i>Extras: </i>{{ item.extras }}</li>
+                {% endif %}
+                <hr>
+            {% empty %}
+                <li class="font-style"><i>There are no items in your cart</i></li>
+            {% endfor %}
+            {% if items %}
+                <li><b>Total: </b>${{ total_price }}</li>
+            {% endif %}
+        </ul>
+    <div>
+
+    <!-- Show buttons if there are items in the cart -->
+    {% if items %}
+    <form action="{% url 'cart' %}" method="post">
+        {% csrf_token %}
+        <input class="btn btn-outline-danger" type="submit" name="clear" value="Clear cart"/>
+        <!-- Button trigger modal -->
+        <button type="button" class="btn btn-outline-success" data-toggle="modal" data-target="#exampleModal">
+            Proceed to checkout
+        </button>
+    </form>
+    {% endif %}
+
+    <!-- Modal -->
+    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Confirm order</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <ul id="cart-list-modal">
+                        {% for item in items %}
+                            <li>{{ item.item }}</li>
+                                <ul class="ul-style">
+                                {% if item.toppings %}
+                                    <li><i>Toppings:</i> {{ item.toppings }}</li>
+                                {% endif %}
+                                </ul>
+                                <ul class="ul-style">
+                                {% if item.extras %}
+                                    <li><i>Extras: </i>{{ item.extras }}</li>
+                                {% endif %}
+                                </ul>
+                        {% endfor %}
+                            <hr>
+                    </ul>
+                    <p><b>Total: </b>${{ total_price }}</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-outline-secondary" data-dismiss="modal">Close</button>
+                    <form action="{% url 'cart' %}" method="post">
+                        {% csrf_token %}
+                        <input hidden value="{{ total_price }}" name="price">
+                        <input class="btn btn-outline-primary" type="submit" name="confirm" value="Confirm"/>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

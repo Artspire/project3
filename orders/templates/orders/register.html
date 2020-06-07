@@ -1,0 +1,19 @@
+{% extends "orders/base.html" %}
+
+{% load crispy_forms_tags %}
+
+{% block title %}
+    Register
+{% endblock %}
+
+{% block content %}
+<h1>Register</h1>
+<hr>
+<form action="{% url 'register' %}" method="post">
+    {% csrf_token %}
+    <div id="form-elements">
+        {{ form|crispy }}
+        <input class="btn btn-outline-primary" type="submit" value="Register"/>
+    </div>
+</form>
+{% endblock %}

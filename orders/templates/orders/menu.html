@@ -1,0 +1,352 @@
+{% extends "orders/base.html" %}
+
+{% block title %}
+    Menu
+{% endblock %}
+
+{% block content %}
+    <h1>Menu</h1>
+    <hr>
+    <div class="container" id="menu">
+        <div class="row">
+            <div class="col-lg-6 sm-12">
+                <!-- Pizza -->
+                <h2>Regular Pizza</h2>
+                <table id="menu-table">
+                    <tr>
+                        <th></th>
+                        <th>Small</th>
+                        <th>Large</th>
+                    </tr>
+                    <tr>
+                        <td>Cheese</td>
+                        <td>$12.70</td>
+                        <td>$17.95</td>
+                    </tr>
+                    <tr>
+                        <td>1 topping</td>
+                        <td>$13.70</td>
+                        <td>$19.95</td>
+                    </tr>
+                    <tr>
+                        <td>2 toppings</td>
+                        <td>$15.20</td>
+                        <td>$21.95</td>
+                    </tr>
+                    <tr>
+                        <td>3 toppings</td>
+                        <td>$16.20</td>
+                        <td>$23.95</td>
+                    </tr>
+                    <tr>
+                        <td>Special</td>
+                        <td>$17.75</td>
+                        <td>$25.95</td>
+                    </tr>
+                </table>
+                <form class="form-inline" action="{% url 'add' %}" method="post">
+                    {% csrf_token %}
+                    <select name="menu">
+                        <option selected disabled>Select regular pizza..</option>
+                        {% for regular_pizza in regular_pizzas %}
+                            <option value="{{ regular_pizza.id }}">{{ regular_pizza.name }}: ${{ regular_pizza.price }} ({{ regular_pizza.get_size_display }})</option>
+                        {% endfor %}
+                    </select>
+                    <select multiple class="form-control" name="toppings" id="multi-select">
+                        <option selected disabled>Select topping..</option>
+                        {% for topping in toppings %}
+                            <option>{{ topping }}</option>
+                        {% endfor %}
+                    </select>
+                    <input class="btn btn-outline-success btn-sm" type="submit" value="Add"/>
+                </form>
+                <br>
+
+                <h2>Sicilian Pizza</h2>
+                <table id="menu-table">
+                    <tr>
+                        <th></th>
+                        <th>Small</th>
+                        <th>Large</th>
+                    </tr>
+                    <tr>
+                        <td>Cheese</td>
+                        <td>$24.45</td>
+                        <td>$38.70</td>
+                    </tr>
+                    <tr>
+                        <td>1 topping</td>
+                        <td>$26.45</td>
+                        <td>$40.70</td>
+                    </tr>
+                    <tr>
+                        <td>2 toppings</td>
+                        <td>$28.45</td>
+                        <td>$42.70</td>
+                    </tr>
+                    <tr>
+                        <td>3 toppings</td>
+                        <td>$29.45</td>
+                        <td>$44.70</td>
+                    </tr>
+                    <tr>
+                        <td>Special</td>
+                        <td>$30.45</td>
+                        <td>$45.70</td>
+                    </tr>
+                </table>
+                <form class="form-inline" action="{% url 'add' %}" method="post">
+                    {% csrf_token %}
+                    <select name="menu">
+                        <option selected disabled>Select sicilian pizza..</option>
+                        {% for sicilian_pizza in sicilian_pizzas %}
+                            <option value="{{ sicilian_pizza.id }}">{{ sicilian_pizza.name }}: ${{ sicilian_pizza.price }} ({{ sicilian_pizza.get_size_display }})</option>
+                        {% endfor %}
+                    </select>
+                    <select multiple class="form-control" name="toppings" id="multi-select">
+                        <option selected disabled>Select topping..</option>
+                        {% for topping in toppings %}
+                            <option>{{ topping }}</option>
+                        {% endfor %}
+                    </select>
+                    <input class="btn btn-outline-success btn-sm" type="submit" value="Add"/>
+                </form>
+                <br>
+
+                <!-- Subs -->
+                <h2>Sub</h2>
+                <table id="menu-table">
+                    <tr>
+                        <th></th>
+                        <th>Small</th>
+                        <th>Large</th>
+                    </tr>
+                    <tr>
+                        <td>Cheese</td>
+                        <td>$6.50</td>
+                        <td>$7.95</td>
+                    </tr>
+                    <tr>
+                        <td>Italian</td>
+                        <td>$6.50</td>
+                        <td>$7.95</td>
+                    </tr>
+                    <tr>
+                        <td>Ham + Cheese</td>
+                        <td>$6.50</td>
+                        <td>$7.95</td>
+                    </tr>
+                    <tr>
+                        <td>Meatball</td>
+                        <td>$6.50</td>
+                        <td>$7.95</td>
+                    </tr>
+                    <tr>
+                        <td>Tuna</td>
+                        <td>$6.50</td>
+                        <td>$7.95</td>
+                    </tr>
+                    <tr>
+                        <td>Turkey</td>
+                        <td>$7.50</td>
+                        <td>$8.50</td>
+                    </tr>
+                    <tr>
+                        <td>Chicken Parmigiana</td>
+                        <td>$7.50</td>
+                        <td>$8.50</td>
+                    </tr>
+                    <tr>
+                        <td>Eggplant Parmigiana</td>
+                        <td>$6.50</td>
+                        <td>$7.95</td>
+                    </tr>
+                    <tr>
+                        <td>Steak</td>
+                        <td>$6.50</td>
+                        <td>$7.95</td>
+                    </tr>
+                    <tr>
+                        <td>Steak + Cheese</td>
+                        <td>$6.95</td>
+                        <td>$8.50</td>
+                    </tr>
+                    <tr>
+                        <td>+ Mushrooms</td>
+                        <td>+ $0.50</td>
+                        <td>+ $0.50</td>
+                    </tr>
+                    <tr>
+                        <td>+ Green Peppers</td>
+                        <td>+ $0.50</td>
+                        <td>+ $0.50</td>
+                    </tr>
+                    <tr>
+                        <td>+ Onions</td>
+                        <td>+ $0.50</td>
+                        <td>+ $0.50</td>
+                    </tr>
+                    <tr>
+                        <td>Sausage, Peppers & Onions</td>
+                        <td></td>
+                        <td>$8.50</td>
+                    </tr>
+                    <tr>
+                        <td>Hamburger</td>
+                        <td>$4.60</td>
+                        <td>$6.95</td>
+                    </tr>
+                    <tr>
+                        <td>Cheeseburger</td>
+                        <td>$5.10</td>
+                        <td>$7.45</td>
+                    </tr>
+                    <tr>
+                        <td>Fried Chicken</td>
+                        <td>$6.95</td>
+                        <td>$8.50</td>
+                    </tr>
+                    <tr>
+                        <td>Veggie</td>
+                        <td>$6.95</td>
+                        <td>$8.50</td>
+                    </tr>
+                    <tr>
+                        <td>Extra Cheese on any sub</td>
+                        <td>+ $0.50</td>
+                        <td>+ $0.50</td>
+                    </tr>
+                </table>
+                <form class="form-inline" action="{% url 'add' %}" method="post">
+                    {% csrf_token %}
+                    <select name="menu">
+                        <option selected disabled>Select sub..</option>
+                        {% for sub in subs %}
+                            <option value="{{ sub.id }}">{{ sub.name }}: ${{ sub.price }} ({{ sub.get_size_display }})</option>
+                        {% endfor %}
+                    </select>
+                    <select multiple class="form-control" name="extras" id="multi-select-sub">
+                        <option selected disabled>Select extra..</option>
+                        {% for extra in extras %}
+                            <option>{{ extra }}</option>
+                        {% endfor %}
+                    </select>
+                    <input class="btn btn-outline-success btn-sm" type="submit" value="Add"/>
+                </form>
+            </div>
+
+            <div class="col-lg-6 sm-12">
+                <!-- Pasta -->
+                <h2>Pasta</h2>
+                <table id="menu-table">
+                    <tr>
+                        <td>Baked Ziti w/Mozzarella</td>
+                        <td>$6.50</td>
+                    </tr>
+                    <tr>
+                        <td>Baked Ziti w/Meatballs</td>
+                        <td>$8.75</td>
+                    </tr>
+                    <tr>
+                        <td>Baked Ziti w/Chicken</td>
+                        <td>$9.75</td>
+                    </tr>
+                </table>
+                <form class="form-inline" action="{% url 'add' %}" method="post">
+                    {% csrf_token %}
+                    <select name="menu">
+                        <option selected disabled>Select pasta..</option>
+                        {% for pasta in pastas %}
+                            <option value="{{ pasta.id }}">{{ pasta.name }}: ${{ pasta.price }}</option>
+                        {% endfor %}
+                    </select>
+                    <input class="btn btn-outline-success btn-sm" type="submit" value="Add"/>
+                </form>
+                <br>
+
+                <!-- Salads -->
+                <h2>Salads</h2>
+                <table id="menu-table">
+                    <tr>
+                        <td>Garden Salad</td>
+                        <td>$6.25</td>
+                    </tr>
+                    <tr>
+                        <td>Greek Salad</td>
+                        <td>$8.25</td>
+                    </tr>
+                    <tr>
+                        <td>Antipasto</td>
+                        <td>$8.25</td>
+                    </tr>
+                    <tr>
+                        <td>Salad w/Tuna</td>
+                        <td>$8.25</td>
+                    </tr>
+                </table>
+                <form class="form-inline" action="{% url 'add' %}" method="post">
+                    {% csrf_token %}
+                    <select name="menu">
+                        <option selected disabled>Select salad..</option>
+                        {% for salad in salads %}
+                            <option value="{{ salad.id }}">{{ salad.name }}: ${{ salad.price }}</option>
+                        {% endfor %}
+                    </select>
+                    <input class="btn btn-outline-success btn-sm" type="submit" value="Add"/>
+                </form>
+                <br>
+
+                <!-- Dinner Platters -->
+                <h2>Dinner Platters</h2>
+                <table id="menu-table">
+                    <tr>
+                        <th></th>
+                        <th>Small</th>
+                        <th>Large</th>
+                    </tr>
+                    <tr>
+                        <td>Garden Salad</td>
+                        <td>$40.00</td>
+                        <td>$65.00</td>
+                    </tr>
+                    <tr>
+                        <td>Greek Salad</td>
+                        <td>$50.00</td>
+                        <td>$75.00</td>
+                    </tr>
+                    <tr>
+                        <td>Antipasto</td>
+                        <td>$50.00</td>
+                        <td>$75.00</td>
+                    </tr>
+                    <tr>
+                        <td>Baked Ziti</td>
+                        <td>$40.00</td>
+                        <td>$65.00</td>
+                    </tr>
+                    <tr>
+                        <td>Meatball Parm</td>
+                        <td>$50.00</td>
+                        <td>$75.00</td>
+                    </tr>
+                    <tr>
+                        <td>Chicken Parm</td>
+                        <td>$55.00</td>
+                        <td>$85.00</td>
+                    </tr>
+                </table>
+                <form class="form-inline" action="{% url 'add' %}" method="post">
+                    {% csrf_token %}
+                    <select name="menu">
+                        <option selected disabled>Select dinner platter..</option>
+                        {% for platter in platters %}
+                            <option value="{{ platter.id }}">{{ platter.name }}: ${{ platter.price }} ({{ platter.get_size_display }})</option>
+                        {% endfor %}
+                    </select>
+                    <input class="btn btn-outline-success btn-sm" type="submit" value="Add"/>
+                </form>
+
+            </div>
+        </div>
+    </div>
+{% endblock %}

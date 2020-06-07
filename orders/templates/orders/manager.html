@@ -1,0 +1,43 @@
+{% extends "orders/base.html" %}
+
+{% block title %}
+    Order Manager
+{% endblock %}
+
+{% block content %}
+    <h1>Order manager</h1>
+    <hr>
+    <ul class="ul-style">
+        {% if orders %}
+            <li id="cart-list-title">Orders:</li>
+        {% endif %}
+        {% for order in orders %}
+        {% empty %}
+            <li class="font-style"><i>There are no orders to display</i></li>
+        {% endfor %}
+    </ul>
+    {% for order in orders %}
+        <form action="{% url 'manager' %}" method="post">
+            {% csrf_token %}
+            <table id="manager-table">
+                <tr id="orders-table-head">
+                    <td><b>Order number:</b> {{ order.order_number }}</td>
+                    <td><b>Customer:</b> {{ order.user }}</td>
+                    <td><b>Price:</b> ${{ order.total_price }}</td>
+                    <td><b>Status:</b> {{ order.get_status_display }}</td>
+                    <td><b>Date:</b> {{ order.time }}</td>
+                </tr>
+                <tr>
+                    <td colspan="5" id="order-items">{{ order.items }}</td>
+                </tr>
+            </table>
+            <br>
+            {% if order.status == "P" %}
+            <input hidden value="{{ order.order_number }}" name="number">
+            <input class="btn btn-outline-dark" type="submit" value="Complete order"/>
+            {% endif %}
+        </form>
+        <hr>
+    {% endfor %}
+
+{% endblock %}
