@@ -6,19 +6,17 @@ For project3, I have made, per the requirements, a web application for handling 
 
 ## Layout
 
-The design of the website is quite minimalist with a combination of fairly bright colors and a light font weight. For the background of the website, I used the colors of the Italian flag which I found on <a href="https://www.schemecolor.com/italy-flag-colors.php">SchemeColor</a>. For the layout, I have made use of <a href="https://getbootstrap.com/">Bootstrap</a> components, including the grid system, a modal and a navbar. The size of the containers change depending on the width of the screen, making the website responsive and look good on all screen sizes.
+The design of the website is quite minimalist with a combination of fairly bright colors and a light font weight. For the background of the website, I used the colors of the Italian flag which I found on <a href="https://www.schemecolor.com/italy-flag-colors.php">SchemeColor</a>. For the layout, I have made use of <a href="https://getbootstrap.com/">Bootstrap</a> components, including the grid system, a modal and a navbar.
 
 ## Files
 
-My Django project folder contains two apps: <b>orders</b> and <b>pizza</b>.
+My Django project folder contains one app: <b>orders</b>.
 
-Inside 'orders', there is a <i>static</i> folder that lists all the database migrations, a <i>static</i> folder containing a number of images, an icon and a `styles.css` file, and a <i>templates</i> folder containing 8 .html template files that make up the website.
+Inside <b>orders</b>, there is a <i>migrations</i> folder that lists all the database migrations, a <i>static</i> folder containing a number of images, an icon and a `styles.css` file, and a <i>templates</i> folder containing 8 .html template files that make up the website.
 
-`forms.py`
+A few other noteworthy files are `forms.py` which defines the custom RegistrationForm, `models.py` which defines all the tables in the database, `urls.py` that lists all the URL routes and `views.py` that contains all the necessary Python code for running the website.
 
-django-crispy-forms has been added to `requirements.txt`
-
- The SocketIO JavaScript code can all be found at the bottom of the `layout.html` file. Furthermore, the project folder contains a `requirements.txt` file listing all the Python packages used, a `helpers.py` file that defines the @login-required function and, lastly, an `application.py` file that contains all the necessary Flask code for running the website.
+Lastly, outside of the app folder, there is <i>pizza</i> folder containing all the default Django project files, a `db.sqlite3` database file, a `manage.py` file and a `requirements.txt` file listing all the Python packages used and which django-crispy-forms has been added to.
 
 ## Functionality
 
@@ -26,17 +24,18 @@ When a user browses to the website, the user is shown a homepage with some infor
 
 After registration or logging in, the user is redirected to the menu page where he or she can take a look at the restaurant's menu and add menu items to his/her shopping cart.
 
-The user is solely responsible for selecting the right amount of toppings for his/her pizza. Moreover, the user can add any type of extra to his/her sub. The price of a sub is recalculated accordingly in the shopping cart.
+The user is solely responsible for selecting the right amount of toppings for his/her pizza. Moreover, the user can add any type of extra to his/her sub. The price of the sub is recalculated accordingly in the shopping cart.
 
-If the user confirms the order, the user is taken to the order history page where the user
+To see the items the user has added to the shopping cart, the user can click on 'cart' at the top of the page. On the cart page, the user is presented with a list of the items (including toppings or extras if they were added) and the total price of all the items in the shopping cart. Furthermore, the user has the option to delete all the items from the shopping cart by clicking on 'clear cart' or to proceed to checkout by clicking on 'proceed to checkout'.
 
-a nice presentation including the order number, the order status and the date and time the order was placed.
+Before the order is actually placed, the user first needs to confirm the order by clicking on 'confirm' in the dialog box that is shown after clicking on 'proceed to checkout'. At this stage, the user can also still go back to the shopping cart by clicking on 'close'.
 
-Items from cart are deleted.
+If the user confirms the order, the user is taken to the order history page where the user is shown a nice presentation of every placed order including the order number, the order status and the date and time the order was placed.
 
-Saving the order to the database was actually quite challenging. My solution is to as a long string
-with the help of some JavaScript.
+The items in the cart are deleted from the CartItem table and the order is saved to the Order table. Saving the order to the database was actually quite challenging. My solution is to save the entire list of items (including toppings or extras) as a long string to the 'items' field in the Order table and display every item on an new line on the order history/order manager page with the help of some JavaScript code that can be found in `base.html`.
 
 ### Personal touch
 
-My personal touch is allowing site administrators to mark orders as complete and allowing users to see the status of their pending or completed orders. When the site administrator (superuser) logs in to the website, the
+My personal touch is allowing site administrators to mark orders as complete and allowing users to see the status of their pending or completed orders. When the site administrator (superuser) logs in to the website, he/she sees a special order manager page that lists all the orders that have been placed by users on the website. Under every order, there is a large 'complete order' button to mark the order as completed and change the order status in the database. After clicking on the button, the order manager page gets refreshed and the button disappears.
+
+At the same time, the user that placed the order will also see that the status of his/her order has changed from pending to completed on the order history page.
