@@ -1,8 +1,8 @@
-# Project 3
+# Pinocchio
 
-<b>Web Programming with Python and JavaScript</b>
+Pinocchio is a web application for handling a pizza restaurant's online orders. The web application has been built with <a href="https://www.djangoproject.com/">Django</a> and makes use of <a href="https://django-crispy-forms.readthedocs.io/en/latest/">django-crispy-forms</a> to easily render good looking forms.
 
-For project3, I have made, per the requirements, a web application for handling a pizza restaurant's online orders. The web application is built with <a href="https://www.djangoproject.com/">Django</a> and makes use of <a href="https://django-crispy-forms.readthedocs.io/en/latest/">django-crispy-forms</a> to easily render good looking forms.
+For a video walkthrough, see: https://youtu.be/Sk9php9HBgY
 
 ## Layout
 
